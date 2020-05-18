@@ -42,6 +42,8 @@ class Game
   def turn 
     input = current_player.move(str)
     if !@board.valid_move?(input)
+      @board.update
+      @board.display
       turn
     else
       puts "Invalid Move"
