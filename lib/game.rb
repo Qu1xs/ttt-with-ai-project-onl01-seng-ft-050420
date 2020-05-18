@@ -22,40 +22,30 @@ class Game
   def won?
     WIN_COMBINATIONS.detect do |combo|
       @board.cells[combo[0]] == @board.cells[combo[1]] &&
-      @board.cells[combo[1]] == @board.cells[combo[2]]
+      @board.cells[combo[1]] == @board.cells[combo[2]] &&
+      @board.cells[combo[0]] != " "
     end
-  end
-  
-  def full?
-    @board.all?{|occupied| occupied != " "}
   end
   
   def draw?
     !won? && @board.full?
-
   end
   
   def over?
-    won? || draw? ? true : false
+    won? || draw?
   end
   
-    def winner
-        if won? && player_1
-          return "X"
-        elsif won? && player_2
-          return "X"
-        else    
-          nil
-        end
-    end
+  def winner
+    won? ? @board.cells[combo.first] : nil
+  end
   
-  # def turn 
-  #   if !@board.valid_move?(move)
-  #     turn
-  #   else
-  #     puts turn
-  #   end
-  # end 
+  def turn 
+    if !@board.valid_move?(move)
+      turn
+    else
+      puts turn
+    end
+  end 
   
   def play
     until over? == true
