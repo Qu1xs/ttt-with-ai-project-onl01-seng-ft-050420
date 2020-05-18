@@ -36,7 +36,7 @@ class Game
   end
   
   def winner
-    won? ? @board.cells[combo.first] : nil
+    won? ? @board.cells[won?[0]] : nil
   end
   
   def turn 
