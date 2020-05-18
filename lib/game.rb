@@ -40,15 +40,18 @@ class Game
   end
   
   def turn 
-    if !@board.valid_move?(move)
+    input = current_player.move(str)
+    if !@board.valid_move?(input)
       turn
     else
-      puts turn
+      puts "Invalid Move"
+      turn
     end
   end 
   
   def play
-    until over? == true
+    board.reset!
+    until over?
       turn
     end
     if won?
