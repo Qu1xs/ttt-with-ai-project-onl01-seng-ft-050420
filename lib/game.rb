@@ -39,20 +39,18 @@ class Game
     won? ? @board.cells[won?[0]] : nil
   end
   
-  def turn 
-    input = current_player.move
-    if !@board.valid_move?(input)
-      @board.update
-      @board.display
+  def turn
+    player = current_player
+    current_move = player.move(@board)
+    if !@board.valid_move?(current_move)
       turn
     else
-      puts "Invalid Move"
-      turn
+      @board.update(current_move, player)
+      @board.display
     end
   end 
-  
+
   def play
-    board.reset!
     until over?
       turn
     end
