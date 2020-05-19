@@ -40,7 +40,7 @@ class Game
   end
   
   def turn 
-    input = current_player.move(str)
+    input = current_player.move
     if !@board.valid_move?(input)
       @board.update
       @board.display
