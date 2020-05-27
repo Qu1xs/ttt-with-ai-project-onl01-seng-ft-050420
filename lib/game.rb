@@ -1,3 +1,7 @@
+
+require_relative "board.rb"
+require_relative "player.rb"
+
 class Game
   attr_accessor :board, :player_1, :player_2
   WIN_COMBINATIONS = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]]
@@ -38,15 +42,18 @@ class Game
   def winner
     won? ? @board.cells[won?[0]] : nil
   end
-  
-  def turn
+
+  def turn 
     player = current_player
-    current_move = player.move(@board)
+    current_move = player.move(board)
     if !@board.valid_move?(current_move)
       turn
     else
-      @board.update(current_move, player)
       @board.display
+      
+      turn
+      puts "Invalid Move"
+      turn
     end
   end 
 
@@ -63,3 +70,13 @@ class Game
   
   
 end
+
+# player_1 = Players::Computer.new("X")
+# player_2 = Players::Computer.new("O")
+
+# board = Board.new
+# board.cells = [" "," "," "," "," "," "," "," "," "]
+
+# game = Game.new(player_1, player_2, board)
+# board.display
+# game.play
